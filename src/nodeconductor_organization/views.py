@@ -9,6 +9,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from nodeconductor.core.permissions import IsAdminOrReadOnly
 from nodeconductor.structure.models import CustomerRole
 from nodeconductor_organization import filters
 from nodeconductor_organization import models
@@ -16,15 +17,10 @@ from nodeconductor_organization import permissions
 from nodeconductor_organization import serializers
 
 
-class OrganizationViewSet(mixins.CreateModelMixin,
-                          mixins.RetrieveModelMixin,
-                          mixins.UpdateModelMixin,
-                          mixins.DestroyModelMixin,
-                          mixins.ListModelMixin,
-                          viewsets.GenericViewSet):
+class OrganizationViewSet(viewsets.ModelViewSet):
     queryset = models.Organization.objects.all()
     serializer_class = serializers.OrganizationSerializer
-    permission_classes = (IsAuthenticated, permissions.IsAdminOrReadOnly)
+    permission_classes = (IsAuthenticated, IsAdminOrReadOnly)
     filter_backends = (rf_filters.DjangoFilterBackend,)
     filter_class = filters.OrganizationFilter
     lookup_field = 'uuid'
@@ -60,17 +56,21 @@ class OrganizationUserViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin
         if instance.can_be_managed_by(request.user):
             instance.is_approved = True
             instance.save()
+            return Response({'detail': "User request for joining the organization has been successfully approved"},
+                            status=status.HTTP_200_OK)
 
-        return Response({'detail': "User request for joining the organization has been successfully approved"},
-                        status=status.HTTP_200_OK)
+        return Response({'detail': "User do no have permission to approve requests for joining the organization"},
+                        status=status.HTTP_403_FORBIDDEN)
 
     @detail_route(methods=['post'])
     def reject(self, request, uuid=None):
-        instance = self.get_object()
+        organization_user = self.get_object()
 
-        if instance.can_be_managed_by(request.user):
-            instance.is_approved = False
-            instance.save()
+        if organization_user.can_be_managed_by(request.user):
+            organization_user.is_approved = False
+            organization_user.save()
+            return Response({'detail': "User has been successfully rejected from the organization"},
+                            status=status.HTTP_200_OK)
 
-        return Response({'detail': "User has been successfully rejected from the organization"},
-                        status=status.HTTP_200_OK)
+        return Response({'detail': "User do not have permission to reject from the organization"},
+                        status=status.HTTP_403_FORBIDDEN)
