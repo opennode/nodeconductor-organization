@@ -10,6 +10,7 @@ Guide
    :maxdepth: 1
 
    installation
+   workflow
 
 API
 ---
