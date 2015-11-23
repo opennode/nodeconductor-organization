@@ -37,11 +37,8 @@ class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
     def get_fields(self):
         fields = super(OrganizationSerializer, self).get_fields()
 
-        try:
-            request = self.context['view'].request
-            user = request.user
-        except (KeyError, AttributeError):
-            return fields
+        request = self.context['request']
+        user = request.user
 
         if not user.is_staff:
             del fields['customer']
@@ -77,17 +74,12 @@ class OrganizationUserSerializer(serializers.HyperlinkedModelSerializer):
     def get_fields(self):
         fields = super(OrganizationUserSerializer, self).get_fields()
 
-        try:
-            request = self.context['view'].request
-            user = request.user
-            method = request.method
-        except (KeyError, AttributeError):
-            return fields
+        request = self.context['request']
 
-        if not user.is_staff:
-            fields['user'].queryset = User.objects.filter(uuid=user.uuid)
+        if not request.user.is_staff:
+            fields['user'].queryset = User.objects.filter(uuid=request.user.uuid)
 
-        if method not in SAFE_METHODS:
+        if request.method not in SAFE_METHODS:
             del fields['is_approved']
 
         return fields
