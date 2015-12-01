@@ -30,7 +30,7 @@ class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
 
         organizations = models.Organization.objects.filter(customer=customer)
         if organizations.exists():
-            raise serializers.ValidationError('Organization for these customer already exist.')
+            raise serializers.ValidationError('Organization for this customer already exist.')
 
         return super(OrganizationSerializer, self).validate(data)
 
