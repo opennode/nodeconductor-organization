@@ -6,6 +6,7 @@ import django.db.models.deletion
 from django.conf import settings
 import uuidfield.fields
 
+import nodeconductor.core.validators
 
 class Migration(migrations.Migration):
 
