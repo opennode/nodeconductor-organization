@@ -14,7 +14,7 @@ class Organization(core_models.UuidMixin,
                    models.Model):
     abbreviation = models.CharField(unique=True, max_length=8)
     native_name = models.CharField(max_length=160, blank=True, null=True)
-    customer = models.OneToOneField(Customer, null=True, on_delete=models.SET_NULL)
+    customer = models.OneToOneField(Customer, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return '%(name)s (%(abbreviation)s)' % {
