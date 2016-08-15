@@ -1,0 +1,16 @@
+language: python
+python:
+- '2.7'
+install:
+- python setup.py install
+script:
+- python setup.py test
+deploy:
+  provider: pypi
+  distributions: "sdist bdist_wheel"
+  user: opennode
+  password:
+    secure: PF/oC3o2sB0WVrh0rglJQqx05HW+gq/ncF9GkUQR9wdJONeAJIXeSZjM6AEB03ZlzP9mz7E3RwwGp8SZGGz0GF2wCB8phOPJfWSnRcfcTOcXV9+mRbJxsyXUTYzqz5dHw8D1pzXwKwMo6AKxW7Sqg3MLmBvpFYTSNlbgwqU5WbY0JjkeTM0otwzp1AV2oZJm0wZxyeuD5lQ7Qew+PqO52zO9pLySVPvc/n/Las0W0T9S5vpcGmAQdjw+E7cCxcsYoVq7YhFK4peJBdsE4G9cRQafbGMaagwobF9kwAPxygfDWmumlmz/d4NdNLVqnhlZNYHe5Va9CY5ra6sr5j/ygG84cX4wocyKIzNAxH//dSEdeaXMZpi9r8eaVfMNpJIsrvd0NeMcPzp/JWdmCYo57KNt8+9zD+ncbN8l3SRpK38srB24a3ltQK9OwhFuRHvBMqnw05e00hSNrS32db76naijecFZ7ZVw68XXEB2HkyKeMbN5Rhfy6q05o9PTDvvqET8sGoj5De9dWJ5zJW0d+xWxBGoQ+ncSZJ0a8eK9VEqgzFo7lnrdYMYTPRQjfiwKZht9S7aDwD//apdEMfai6+FMl4xeH7HI/B62kRGPKAP9dVrIn0dylqCoZvnz71Z7LsJOgg0mrQnbR1NeYLhlxXQ5/mqKlkZJIehJGLiZTsE=
+  on:
+    tags: true
+    repo: opennode/nodeconductor-organization
