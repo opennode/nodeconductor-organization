@@ -38,6 +38,6 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'Operating System :: OS Independent',
-	'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: MIT License',
     ],
 )
