@@ -3,11 +3,12 @@ from __future__ import unicode_literals
 import django_filters
 
 from nodeconductor.core import filters as core_filters
+from nodeconductor.core.filters import UUIDFilter
 from nodeconductor_organization import models
 
 
 class OrganizationFilter(django_filters.FilterSet):
-    customer_uuid = django_filters.CharFilter(
+    customer_uuid = UUIDFilter(
         name='customer__uuid',
     )
     customer = core_filters.URLFilter(
@@ -41,7 +42,7 @@ class OrganizationUserFilter(django_filters.FilterSet):
         name='organization__uuid',
     )
 
-    organization_uuid = django_filters.CharFilter(
+    organization_uuid = UUIDFilter(
         name='organization__uuid',
     )
 
@@ -50,7 +51,7 @@ class OrganizationUserFilter(django_filters.FilterSet):
         name='user__uuid',
     )
 
-    user_uuid = django_filters.CharFilter(
+    user_uuid = UUIDFilter(
         name='user__uuid',
     )
 
