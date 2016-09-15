@@ -7,7 +7,7 @@ dev_requires = [
 ]
 
 install_requires = [
-    'nodeconductor>0.105.0',
+    'nodeconductor>=0.107.0',
 ]
 
 
