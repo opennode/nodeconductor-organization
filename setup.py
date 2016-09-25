@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys
 from setuptools import setup, find_packages
 
 
@@ -8,13 +7,13 @@ dev_requires = [
 ]
 
 install_requires = [
-    'nodeconductor>=0.101.2',
+    'nodeconductor>=0.107.0',
 ]
 
 
 setup(
     name='nodeconductor-organization',
-    version='0.2.1',
+    version='0.3.0',
     author='OpenNode Team',
     author_email='info@opennodecloud.com',
     url='http://nodeconductor.com',
@@ -38,6 +37,6 @@ setup(
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
         'Operating System :: OS Independent',
-        'License :: Other/Proprietary License',
+        'License :: OSI Approved :: MIT License',
     ],
 )
