@@ -1,7 +1,7 @@
 Name: nodeconductor-organization
 Summary: Organization plugin for NodeConductor
 Group: Development/Libraries
-Version: 0.2.1
+Version: 0.3.0
 Release: 1.el7
 License: MIT
 Url: http://nodeconductor.com
@@ -34,6 +34,9 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 
 %changelog
+* Sun Sep 25 2016 Jenkins <jenkins@opennodecloud.com> - 0.3.0-1.el7
+- New upstream release
+
 * Mon Aug 15 2016 Jenkins <jenkins@opennodecloud.com> - 0.2.1-1.el7
 - New upstream release
 
